@@ -2,7 +2,7 @@
   <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
     <mat-icon>menu</mat-icon>
   </button>
-  <span>My App</span>
+  <span>Pokemon</span>
   <span class="example-spacer"></span>
   <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
     <mat-icon>favorite</mat-icon>
@@ -15,43 +15,47 @@
 
 <div class="container">
 
-  <div class="poke-list">
+  <div *ngIf="!showSelected" class="poke-list">
 
-    <!-- <mat-card *ngFor="let poke of starterPokemon" class="example-card">
-      <mat-card-header>
-        <div mat-card-avatar class="example-header-image"></div>
-        <mat-card-title>Shiba Inu</mat-card-title>
-        <mat-card-subtitle>Dog Breed</mat-card-subtitle>
-      </mat-card-header>
-      <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
-      <mat-card-content>
-        <p>
-          The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
-          A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
-          bred for hunting.
-        </p>
-      </mat-card-content>
-      <mat-card-actions>
-        <button mat-button>LIKE</button>
-        <button mat-button>SHARE</button>
-      </mat-card-actions>
-    </mat-card> -->
+    <div *ngIf="loaded === false; else pokeCards" class="not-loaded">
+      <mat-spinner *ngFor="let poke of starterPokemon"></mat-spinner>
+    </div>
+
+    <ng-template #pokeCards>
+      <a (click)="openDialog(poke)" matRipple [matRippleRadius]="radius" [matRippleColor]="color" *ngFor="let poke of pokelist" _ngcontent-uvf-c136="" class="docs-component-category-list-item ng-star-inserted">
+        <div _ngcontent-uvf-c136="" class="docs-component-category-list-card"><img _ngcontent-uvf-c136="" loading="lazy"
+            alt="" role="presentation" aria-hidden="true"
+            class="docs-component-category-list-card-image-wrapper ng-star-inserted"
+            src="{{poke.sprites.front_default}}">
+          <!---->
+          <div _ngcontent-uvf-c136="" class="docs-component-category-list-card-title">{{poke.name}}</div>
+          <div _ngcontent-uvf-c136="" class="docs-component-category-list-card-summary">
+            id: {{poke.id}} <br>
+            height: {{poke.height}}<br>
+            weight: {{poke.weight}}<br>
+            types: {{poke.types[0].type.name}}
+          </div>
+        </div>
+      </a>
+    </ng-template>
 
   </div>
 
-  <div class="poke-center-container">
-    <a *ngFor="let poke of pokelist" _ngcontent-uvf-c136="" class="docs-component-category-list-item ng-star-inserted" href="/components/checkbox">
+  <!-- <mat-divider></mat-divider> -->
+
+  <div *ngIf="showSelected" class="poke-center-container">
+    <a  matRipple [matRippleRadius]="radius" [matRippleColor]="color" _ngcontent-uvf-c136="" class="docs-component-category-list-item ng-star-inserted">
       <div _ngcontent-uvf-c136="" class="docs-component-category-list-card"><img _ngcontent-uvf-c136="" loading="lazy"
           alt="" role="presentation" aria-hidden="true"
           class="docs-component-category-list-card-image-wrapper ng-star-inserted"
-          src="{{poke.sprites.front_default}}">
+          src="{{currPoke.sprites.front_default}}">
         <!---->
-        <div _ngcontent-uvf-c136="" class="docs-component-category-list-card-title">{{poke.name}}</div>
+        <div _ngcontent-uvf-c136="" class="docs-component-category-list-card-title">{{currPoke.name}}</div>
         <div _ngcontent-uvf-c136="" class="docs-component-category-list-card-summary">
-          id: {{poke.id}} <br>
-          height: {{poke.height}}<br>
-          weight: {{poke.weight}}<br>
-          types: {{poke.types[0].type.name}}
+          id: {{currPoke.id}} <br>
+          height: {{currPoke.height}}<br>
+          weight: {{currPoke.weight}}<br>
+          types: {{currPoke.types[0].type.name}}
         </div>
       </div>
     </a>

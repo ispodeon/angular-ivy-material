@@ -14,6 +14,7 @@ export interface PokemonResponse {
     stats: Stat[];
     types: Type[];
     weight: number;
+    name: string;
 }
 export interface Ability{
     name:any;

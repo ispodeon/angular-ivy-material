@@ -38,6 +38,9 @@ mat-toolbar{
   border-radius: 4px;
   background: white;
 }
+.docs-component-category-list-card:hover {
+  background: rgba(0,0,0,.03);
+}
 .docs-component-category-list-card-image-wrapper[_ngcontent-uvf-c136] {
   height: 156px;
 }
@@ -66,7 +69,8 @@ mat-toolbar{
   display: inline-block;
   margin: 20px;
   vertical-align: top;
-  width: 280px;
+  /* width: 280px; */
+  width: auto;
   text-decoration: none;
 }
 .docs-component-category-list-card[_ngcontent-uvf-c136] {

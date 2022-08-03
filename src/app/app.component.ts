@@ -1,8 +1,9 @@
-import { Component, VERSION, OnInit } from '@angular/core';
-import { of, switchMap, concatMap, from } from 'rxjs';
+import { Component, OnInit, Inject } from '@angular/core';
+import { concatMap, from } from 'rxjs';
 import { PokemonResponse } from './interfaces/pokemon.interface';
 import { PokemonServiceService } from './services/pokemon-service.service';
 
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 
 @Component({
   selector: 'my-app',
@@ -10,31 +11,69 @@ import { PokemonServiceService } from './services/pokemon-service.service';
   styleUrls: [ './app.component.css' ]
 })
 export class AppComponent implements OnInit {
-  name = 'Angular ' + VERSION.major;
   starterPokemon = [ "Bulbasaur", "Squirtle", "Charmander" ];
   starterPokemon$ = from(this.starterPokemon);
   pokelist:PokemonResponse[] = [];
 
-  constructor(private pokeService: PokemonServiceService){ }
+  loaded = false;
+
+  showSelected = false;
+
+  radius: number;
+  color: string;
+
+  currPoke:PokemonResponse;
+
+  constructor(private pokeService: PokemonServiceService, public dialog: MatDialog){ }
 
   ngOnInit(): void {
 
     this.starterPokemon$.pipe(
-      // switchMap((pokemon) => {
-      //   return this.pokeService.getPokemon(pokemon).subscribe()
-      // })
+
       concatMap((pokemon) => {
         return this.pokeService.getPokemon(pokemon.toLowerCase())
       })
     )
-    .subscribe((pokemon) => {
-      this.pokelist.push(pokemon);
-    })
-      /*
-      this.pokeService.getPokemon().subscribe((pokemon:PokemonResponse) => {
-        console.log('pokemon', pokemon.abilities);
-      })
-      */
+    .subscribe(
+      (pokemon) => { this.pokelist.push(pokemon); },
+      (err) => { },
+      () => { this.loaded = true; }
+    )
+  }
+
+  openDialog(poke: PokemonResponse): void {
+    const dialogRef = this.dialog.open(DialogOverviewExampleDialog, {
+      width: '250px',
+      data: poke,
+      disableClose: false
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      
+      if(typeof result === 'object'){
+        console.log(typeof result);
+
+        this.currPoke = result;
+        this.showSelected = true;
+        
+      }
+      
+    });
   }
   
+}
+
+@Component({
+  selector: 'dialog-overview-example-dialog',
+  templateUrl: './dialog-overview-example-dialog.html',
+})
+export class DialogOverviewExampleDialog {
+  constructor(
+    public dialogRef: MatDialogRef<DialogOverviewExampleDialog>,
+    @Inject(MAT_DIALOG_DATA) public data: PokemonResponse,
+  ) {}
+
+  onNoClick(): void {
+    this.dialogRef.close(true);
+  }
 }

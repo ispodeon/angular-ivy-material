@@ -40,15 +40,19 @@
   </div>
 
   <div class="poke-center-container">
-    <a *ngFor="let poke of starterPokemon" _ngcontent-uvf-c136="" class="docs-component-category-list-item ng-star-inserted" href="/components/checkbox">
+    <a *ngFor="let poke of pokelist" _ngcontent-uvf-c136="" class="docs-component-category-list-item ng-star-inserted" href="/components/checkbox">
       <div _ngcontent-uvf-c136="" class="docs-component-category-list-card"><img _ngcontent-uvf-c136="" loading="lazy"
           alt="" role="presentation" aria-hidden="true"
           class="docs-component-category-list-card-image-wrapper ng-star-inserted"
-          src="https://material.angular.io/assets/screenshots/checkbox.scene.png">
+          src="{{poke.sprites.front_default}}">
         <!---->
-        <div _ngcontent-uvf-c136="" class="docs-component-category-list-card-title">Checkbox</div>
-        <div _ngcontent-uvf-c136="" class="docs-component-category-list-card-summary">Captures boolean input with an
-          optional indeterminate mode.</div>
+        <div _ngcontent-uvf-c136="" class="docs-component-category-list-card-title">{{poke.name}}</div>
+        <div _ngcontent-uvf-c136="" class="docs-component-category-list-card-summary">
+          id: {{poke.id}} <br>
+          height: {{poke.height}}<br>
+          weight: {{poke.weight}}<br>
+          types: {{poke.types[0].type.name}}
+        </div>
       </div>
     </a>
   </div>

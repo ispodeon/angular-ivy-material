@@ -1,31 +1,74 @@
-section {
-  display: table;
+mat-toolbar{
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 2;
+}
+.example-card {
+  max-width: 300px;
 }
 
-.example-label {
-  display: table-cell;
-  font-size: 14px;
-  margin-left: 8px;
-  min-width: 120px;
+.example-header-image {
+  background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+  background-size: cover;
 }
 
-.example-button-row {
-  display: table-cell;
-  width: 490px;
+.container {
+  /* height: 100vh; */
+  margin-top: 72px;
+  box-shadow:  3px 5px -1px #0003, 0 6px 10px #00000024, 0 1px 18px #0000001f
 }
-
-.example-button-row .mat-button-base {
-  margin: 8px 8px 8px 0;
+.blu-back {
+  background-color: blue;
+  padding: 2rem;
 }
-
-.example-flex-container {
+.poke-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  place-items: center;
+}
+.poke-center-container{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  place-items: center;
+}
+.docs-component-category-list-card {
+  border: 1px solid rgba(0,0,0,.12);
+  border-radius: 4px;
+  background: white;
+}
+.docs-component-category-list-card-image-wrapper[_ngcontent-uvf-c136] {
+  height: 156px;
+}
+.docs-component-category-list-card-image-wrapper {
+  border-bottom: 1px solid rgba(0,0,0,.12);
+}
+.docs-component-category-list-item[_ngcontent-uvf-c136] .docs-component-category-list-card-title[_ngcontent-uvf-c136] {
+  align-items: center;
   display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
+  padding: 15px;
+  font-size: 20px;
+  font-weight: 500;
 }
-
-.example-button-container {
-  display: flex;
-  justify-content: center;
-  width: 120px;
+.docs-component-category-list-card-title {
+  color: #000000de;
+}
+.docs-component-category-list-card-summary[_ngcontent-uvf-c136] {
+  padding: 0 15px 15px;
+  min-height: 2.4em;
+  font-size: 15px;
+}
+.docs-component-category-list-card-summary {
+  color: #0000008a;
+}
+.docs-component-category-list-item[_ngcontent-uvf-c136] {
+  display: inline-block;
+  margin: 20px;
+  vertical-align: top;
+  width: 280px;
+  text-decoration: none;
+}
+.docs-component-category-list-card[_ngcontent-uvf-c136] {
+  overflow: hidden;
 }
